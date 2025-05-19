@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrega práctica juego - Javier Capilla Martínez</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #111111;
+            background-image: url('assets/img/space_bg.jpg');
+        }
+        
+        canvas {
+            border: 2px solid #333333;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body> 
+    <canvas id="game" width="800" height="600"></canvas>
+
+    <!-- Unión de html con index.js-->
+    <script type="module" src="index.js"></script>  
+</body>
+</html>
