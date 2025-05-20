@@ -14,14 +14,13 @@ constructor(x, y, width, height, color = '#FF0000') {
             ctx.fillStyle = this.color;
             ctx.fillRect(this.x, this.y, this.width, this.height);
             
-            // Añadir un borde para mejor apariencia
             ctx.strokeStyle = '#FFFFFF';
             ctx.lineWidth = 2;
             ctx.strokeRect(this.x, this.y, this.width, this.height);
         }
     }
     
-    // Método para verificar colisión con la pelota
+    // verificar colisión con la pelota
     checkCollision(ball) {
         if (!this.visible) return false;
         

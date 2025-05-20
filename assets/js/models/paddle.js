@@ -5,7 +5,7 @@ export class Paddle {
         this.width = width;
         this.height = height;
         this.color = color;
-        this.speed = 9;
+        this.speed = 12;
         this.isMovingLeft = false;
         this.isMovingRight = false;
     }
