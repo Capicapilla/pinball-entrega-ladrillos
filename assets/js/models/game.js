@@ -9,6 +9,7 @@ import { Paddle } from './paddle.js';
 export class Game {
     constructor(canvas, ctx) {
         console.log("Iniciando Game...");
+
         
         // Iniciar el juego con el canvas
         this.canvas = canvas;
@@ -33,7 +34,7 @@ export class Game {
             canvasWidth / 2,       // x (centrado)
             canvasHeight -5,     // y (por encima del paddle)
             10,                    // radio
-            5              // velocidad
+            6             // velocidad
         );
         
         // Inicializar ladrillos
@@ -43,6 +44,16 @@ export class Game {
         // Estado del juego
         this.score = 0;
         this.lives = 3;
+            //añado sonidos
+        this.brickHitSound = new Audio('./assets/sounds/breakBrick.mp3');
+        this.brickHitSound.volume = 0.3;
+        this.winSound = new Audio('./assets/sounds/WIN.mp3');
+        this.winSound.volume = 1;
+        this.looserSound = new Audio('./assets/sounds/looser.mp3');
+        this.looserSound.volume = 1;
+        this.tryAgain = new Audio ('./assets/sounds/try-again.mp3');
+        this.tryAgain.volume = 0.3;
+
         this.isGameOver = false;
         this.hasWon = false;
         
@@ -90,7 +101,11 @@ export class Game {
         if (remainingBricks === 0) {
             this.hasWon = true;
             this.isGameOver = true;
+
+            this.winSound.currentTime = 0;
+            this.winSound.play();
         }
+        
     }
     
     drawGameOver() {
@@ -115,7 +130,7 @@ export class Game {
             this.canvas.width / 2,
             this.canvas.height - 50,
             10,
-            7
+            6 //velocidad cuando mueres, la bola al reiniciarse mantiene la velocidad
         );
         console.log("Nueva pelota creada");
     }
@@ -151,15 +166,20 @@ export class Game {
             if (ballLost) {
                 // La pelota desaparece
                 this.ball = null;
-
+                
                 this.lives--;
+
                 if (this.lives <= 0) {
                     this.isGameOver = true;
+                    this.looserSound.currentTime = 0;
+                    this.looserSound.play()
                 } else {
                     // Espera un breve momento antes de crear una nueva pelota
+                    this.tryAgain.currentTime = 0;
+                    this.tryAgain.play();
                     setTimeout(() => {
                         this.resetBall();
-                    }, 1000); // 1 segundo de retraso
+                    }, 2000); // 1 segundo de retraso
                 }
             }
 
@@ -171,6 +191,9 @@ export class Game {
                 if (this.ball && brick.checkCollision(this.ball)) {
                     this.ball.dy = -this.ball.dy; // Invertir dirección vertical
                     this.score += 10;
+                    //mi sonido
+                    this.brickHitSound.currentTime = 0;
+                    this.brickHitSound.play();
                 }
             }
         }

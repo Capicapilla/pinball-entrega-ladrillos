@@ -37,6 +37,7 @@ constructor(x, y, width, height, color = '#FF0000') {
         }
         return false;
     }
+
 }
 
 console.log("vinculado con brick")
