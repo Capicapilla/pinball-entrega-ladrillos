@@ -23,35 +23,37 @@ export class Ball {
         this.y += this.dy;
         
         // Colisión con los bordes horizontales
-        if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+        if (this.x + this.radius >= canvas.width || this.x - this.radius < 0) {
             this.dx = -this.dx;
         }
         
         // Colisión con el borde superior
-        if (this.y - this.radius < 0) {
+        if (this.y - this.radius <= 0) {
             this.dy = -this.dy;
         }
+
+        // Verificar si la pelota toca el suelo (borde inferior)
+        if (this.y + this.radius > canvas.height) {
+            return true; // Vida perdida, la pelota desaparece
+        }
         
-        // Colisión con el paddle
+        // Colisión con el paddle (Correción)
         if (
-            this.dy > 0 &&
-            this.y + this.radius >= paddle.y &&
-            this.y + this.radius <= paddle.y + paddle.height &&
-            this.x >= paddle.x &&
-            this.x <= paddle.x + paddle.width
+           this.x + this.radius > paddle.x &&
+           paddle.x + paddle.width > this.x &&
+           this.y + this.radius > paddle.y &&
+           paddle.y + paddle.width > this.y
+
         ) {
-            // Calcular la posición de rebote para variar el ángulo
-            let hitPosition = (this.x - paddle.x) / paddle.width;
-            let angle = hitPosition * Math.PI - Math.PI / 2 ;
+            // Calcular la posición de rebote para variar el ángulo (Lo pasamos a positivo)
+            let hitPosition = Math.abs(this.x - paddle.x) / paddle.width;
+            let angle = Math.abs(hitPosition * Math.PI - Math.PI / 2);
             
             this.dx = this.speed * Math.cos(angle);
             this.dy = -this.speed * Math.sin(angle);
         }
         
-        // Verificar si la pelota toca el suelo (borde inferior)
-        if (this.y + this.radius > canvas.height) {
-            return true; // Vida perdida, la pelota desaparece
-        }
+        
         
         return false;
     }

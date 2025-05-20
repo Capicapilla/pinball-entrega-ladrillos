@@ -5,6 +5,7 @@ import { Game } from './assets/js/models/game.js';
 
 window.addEventListener('DOMContentLoaded', () => {
     console.log("DOM CARGADO");
+     
 
     const canvas = document.getElementById('game');
     if (!canvas) {
@@ -12,6 +13,8 @@ window.addEventListener('DOMContentLoaded', () => {
         return;
     }
     
+    resizeCanvas(canvas);
+
     const ctx = canvas.getContext('2d');
     
     // Inicializar el juego pasando el canvas y el contexto
@@ -51,10 +54,7 @@ function resizeCanvas(canvas) {
 }
 
 // Aplica el tamaño inicial
-window.addEventListener('load', () => {
-    const canvas = document.getElementById('game');
-    resizeCanvas(canvas);
-});
+
 
 // Actualiza el tamaño cuando cambia la ventana
 window.addEventListener('resize', () => {
@@ -64,3 +64,4 @@ window.addEventListener('resize', () => {
     // Aquí podrías agregar código para reiniciar o reajustar el juego después de redimensionar
     // Por ejemplo: game.updateDimensions(); si implementas ese método
 });
+

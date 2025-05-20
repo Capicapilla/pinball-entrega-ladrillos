@@ -27,9 +27,10 @@ constructor(x, y, width, height, color = '#FF0000') {
         // Detectar si la pelota colisiona con el ladrillo
         if (
             ball.x + ball.radius > this.x &&
-            ball.x - ball.radius < this.x + this.width &&
-            ball.y + ball.radius > this.y &&
-            ball.y - ball.radius < this.y + this.height
+           this.x + this.width > ball.x &&
+           ball.y + ball.radius > this.y &&
+           this.y + this.width > ball.y
+
         ) {
             this.visible = false;
             return true;
