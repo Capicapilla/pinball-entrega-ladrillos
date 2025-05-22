@@ -34,7 +34,7 @@ export class Game {
             canvasWidth / 2,       // x (centrado)
             canvasHeight -5,     // y (por encima del paddle)
             10,                    // radio
-            6             // velocidad
+            6            // velocidad
         );
         
         // Inicializar ladrillos
